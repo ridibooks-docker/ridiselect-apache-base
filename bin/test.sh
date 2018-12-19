@@ -7,7 +7,7 @@ function start()
     docker run -d --rm \
         --name apache-test \
         -v $(pwd)/test:/test \
-        -e XDEBUG_ENABLE=1 \
+        -e PHP_XDEBUG_ENABLE=1 \
         -p 8000:80 \
         ridiselect-apache-base:latest >/dev/null 2>&1
 }
