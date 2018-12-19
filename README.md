@@ -13,6 +13,6 @@ Standalone usage example with host's current working directory as document root:
 docker run -p 80:80 \
   -v $(pwd):/app/public \
   --name php-apache \
-  -e XDEBUG_ENABLE=1 \
+  -e PHP_XDEBUG_ENABLE=1 \
   ridibooks/ridiselect-apache-base
 ```

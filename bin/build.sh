@@ -2,7 +2,7 @@
 
 set -e
 
-DOCKER_TAG=${1}
+DOCKER_TAG=${1:-latest}
 
 function print_usage
 {
