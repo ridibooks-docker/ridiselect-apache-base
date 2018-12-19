@@ -17,7 +17,7 @@ function stop()
     docker stop apache-test >/dev/null 2>&1
 }
 
-function test_installed()
+function test_php_configuration()
 {
     docker exec -t apache-test bash -c "php /test/PHPTest.php"
 }
@@ -31,14 +31,14 @@ function test_web()
 
 start
 
-if ! test_installed
+if ! test_php_configuration
 then
-    echo "Failed..(1)" >&2
+    echo "test_php_configuration failed.." >&2
     RESULT=1
 
 elif ! test_web
 then
-    echo "Failed..(2)" >&2
+    echo "test_web failed.." >&2
     RESULT=1
 
 else
