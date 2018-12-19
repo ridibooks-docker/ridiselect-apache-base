@@ -11,7 +11,7 @@ Usage
 Standalone usage example with host's current working directory as document root:
 ```
 docker run -p 80:80 \
-  -v $(pwd):/var/www/html \
+  -v $(pwd):/app/public \
   --name php-apache \
   -e XDEBUG_ENABLE=1 \
   ridibooks/ridiselect-apache-base

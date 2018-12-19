@@ -3,16 +3,11 @@
 function testExtensions()
 {
     $expects = [
-        'apcu',
-        'bcmath',
         'curl',
         'mbstring',
-        'mcrypt',
         'PDO',
         'pdo_mysql',
-        'xdebug',
-        'xml',
-        'zip',
+        'xdebug'
     ];
 
     $actuals = get_loaded_extensions();
