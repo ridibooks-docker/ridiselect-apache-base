@@ -16,6 +16,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 && apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y \
 && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
+RUN ln -sfT /dev/stderr /var/log/apache2/error.log \
+&& ln -sfT /dev/stdout /var/log/apache2/access.log \
+&& ln -sfT /dev/stdout /var/log/apache2/other_vhosts_access.log \
+&& chown -R --no-dereference www-data:www-data /var/log/apache2
+
 COPY php/apache.ini /etc/php/7.2/apache2/php.ini
 COPY php/cli.ini /etc/php/7.2/cli/php.ini
 
