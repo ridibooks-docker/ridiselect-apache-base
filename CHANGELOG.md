@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.3] - 2018-12-28
+### Changed
+- Disable other-vhosts-access-log.conf
+- Remove PID files pre-existing when container starts
+
 ## [2.0.2] - 2018-12-28
 ### Changed
 - Set symbolic links to stdout and stderr for Apache log files

@@ -32,4 +32,7 @@ echo "</Directory>" >> ${APACHE_DOC_ROOT_CONFI_PATH}
 
 a2enconf "document-root-directory.conf"
 
+# Apache gets grumpy about PID files pre-existing
+rm -f /var/run/apache2/apache2.pid
+
 exec "$@"
