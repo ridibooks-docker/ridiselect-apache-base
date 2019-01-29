@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     php7.2-mbstring \
     php7.2-mysql \
     php-xdebug \
+&& rm /etc/php/7.2/apache2/conf.d/20-xdebug.ini \
+&& rm /etc/php/7.2/cli/conf.d/20-xdebug.ini \
 && apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y \
 && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
@@ -42,4 +44,4 @@ COPY ./health.php /app/public/health.php
 # Change entrypoint
 COPY ./docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+CMD ["/usr/sbin/apache2ctl", "-DFOREGROUND"]

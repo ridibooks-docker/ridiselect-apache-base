@@ -2,19 +2,42 @@
 
 set -e
 
-function start()
-{
-    docker run -d --rm \
-        --name apache-test \
-        -v $(pwd)/test:/test \
-        -e PHP_XDEBUG_ENABLE=1 \
-        -e PHP_BLACKFIRE_ENABLE=1 \
-        -p 8000:80 \
-        ridiselect-apache-base:latest >/dev/null 2>&1
-}
+RESULT=0
 
-function stop()
+function run_test()
 {
+    if [[ "${1}" == "with XDEBUG" ]]
+    then
+        echo "Run test with XDEBUG.."
+        docker run -d --rm \
+            --name apache-test \
+            -v $(pwd)/test:/test \
+            -e PHP_XDEBUG_ENABLE=1 \
+            -e PHP_BLACKFIRE_ENABLE=1 \
+            -p 8000:80 \
+            ridiselect-apache-base:latest >/dev/null 2>&1
+    else
+        echo "Run test without XDEBUG.."
+        docker run -d --rm \
+            --name apache-test \
+            -v $(pwd)/test:/test \
+            -e PHP_BLACKFIRE_ENABLE=1 \
+            -p 8000:80 \
+            ridiselect-apache-base:latest >/dev/null 2>&1
+    fi
+
+    if ! test_php_configuration
+    then
+        echo "test_php_configuration failed.." >&2
+        RESULT=1
+    fi
+
+    if ! test_web
+    then
+        echo "test_web failed.." >&2
+        RESULT=1
+    fi
+
     docker stop apache-test >/dev/null 2>&1
 }
 
@@ -30,22 +53,7 @@ function test_web()
 
 
 
-start
-
-if ! test_php_configuration
-then
-    echo "test_php_configuration failed.." >&2
-    RESULT=1
-
-elif ! test_web
-then
-    echo "test_web failed.." >&2
-    RESULT=1
-
-else
-    echo "Success!"
-fi
-
-stop
+run_test "without XDEBUG"
+run_test "with XDEBUG"
 
 exit ${RESULT:-0}

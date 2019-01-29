@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Remove XDebug extension when `PHP_XDEBUG_ENABLE` is not set or is "0"
 
 ## [2.1.0] - 2019-01-19
 ### Added

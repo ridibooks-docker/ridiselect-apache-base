@@ -7,8 +7,11 @@ function testExtensions()
         'mbstring',
         'PDO',
         'pdo_mysql',
-        'xdebug'
     ];
+
+    if (!empty(getenv('PHP_XDEBUG_ENABLE'))) {
+        $expects[] = 'xdebug';
+    }
 
     $actuals = get_loaded_extensions();
 
