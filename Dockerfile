@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     ca-certificates \
     curl \
     php7.2 \
+    php7.2-bcmath \
     php7.2-cli \
     php7.2-curl \
     php7.2-mbstring \
