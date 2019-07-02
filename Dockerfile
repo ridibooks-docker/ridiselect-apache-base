@@ -36,8 +36,10 @@ RUN a2disconf other-vhosts-access-log \
 && ln -sfT /dev/stdout /var/log/apache2/other_vhosts_access.log \
 && chown -R --no-dereference www-data:www-data /var/log/apache2
 
-COPY php/apache.ini /etc/php/7.2/apache2/php.ini
-COPY php/cli.ini /etc/php/7.2/cli/php.ini
+COPY config/apache2/apache2.conf /etc/apache2/apache2.conf
+COPY config/apache2/security.conf /etc/apache2/conf-available/security.conf
+COPY config/php/apache.ini /etc/php/7.2/apache2/php.ini
+COPY config/php/cli.ini /etc/php/7.2/cli/php.ini
 
 COPY ./index.php /app/public/index.php
 COPY ./health.php /app/public/health.php
