@@ -22,6 +22,15 @@ then
     cp "${PHP_XDEBUG_INI_PATH}" /etc/php/7.2/cli/conf.d/20-xdebug.ini
 fi
 
+# Configure Datadog
+if [[ ! -z "${DD_ENABLED}" && "${DD_ENABLED}" != "0" ]]
+then
+    export DD_TRACE_ENABLED=1
+    export DD_SERVICE_NAME=${DD_SERVICE_NAME:-ridiselect}
+else 
+    export DD_TRACE_ENABLED=0
+fi
+
 # Configure Blackfire
 if [[ ! -z "${PHP_BLACKFIRE_ENABLE}" && "${PHP_BLACKFIRE_ENABLE}" != "0" ]]
 then

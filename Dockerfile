@@ -20,6 +20,12 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 && apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y \
 && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
+ENV DD_TRACER_VERSION 0.39.2
+RUN curl -sL -o /tmp/dd-php-tracer \
+    "https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-php-tracer_${DD_TRACER_VERSION}_amd64.deb" \
+&& dpkg -i /tmp/dd-php-tracer \
+&& rm -rf /tmp/dd-php-tracer
+
 RUN curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s \
     "https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;")" \
 && mkdir -p /tmp/blackfire \

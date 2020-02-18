@@ -35,3 +35,11 @@ docker run -p 80:80 \
 - PHP_BLACKFIRE_AGENT_HOST (default: blackfire)
 - PHP_BLACKFIRE_AGENT_PORT (default: 8707)
 - PHP_BLACKFIRE_AGENT_TIMEOUT (default: 0.25)
+
+#### Datadog
+- DD_ENABLED (default: 0)
+- DD_SERVICE_NAME (default: ridiselect)
+- DD_TRACE_ANALYTICS_ENABLED (default: false)
+- DD_AGENT_HOST (default: localhost)
+- DD_TRACE_AGENT_PORT (default: 8126)
+- See more options: https://docs.datadoghq.com/tracing/setup/php/#environment-variable-configuration
