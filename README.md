@@ -29,13 +29,6 @@ docker run -p 80:80 \
 - PHP_XDEBUG_ENABLE
 - PHP_XDEBUG_REMOTE_HOST (default: host.docker.internal)
 
-#### Blackfire
-- PHP_BLACKFIRE_ENABLE
-- PHP_BLACKFIRE_LOG_LEVEL (default: 1)
-- PHP_BLACKFIRE_AGENT_HOST (default: blackfire)
-- PHP_BLACKFIRE_AGENT_PORT (default: 8707)
-- PHP_BLACKFIRE_AGENT_TIMEOUT (default: 0.25)
-
 #### Datadog
 - DD_ENABLED (default: 0)
 - DD_SERVICE_NAME (default: ridiselect)

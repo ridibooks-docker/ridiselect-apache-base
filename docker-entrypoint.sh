@@ -31,19 +31,6 @@ else
     export DD_TRACE_ENABLED=0
 fi
 
-# Configure Blackfire
-if [[ ! -z "${PHP_BLACKFIRE_ENABLE}" && "${PHP_BLACKFIRE_ENABLE}" != "0" ]]
-then
-    PHP_BLACKFIRE_INI_PATH=/etc/php/7.2/apache2/conf.d/20-blackfire.ini
-    echo "extension=blackfire.so" > "${PHP_BLACKFIRE_INI_PATH}"
-    echo "blackfire.log_file=/var/log/blackfile/blackfire.log" >> "${PHP_BLACKFIRE_INI_PATH}"
-    echo "blackfire.log_level=${PHP_BLACKFIRE_LOG_LEVEL:-1}" >> "${PHP_BLACKFIRE_INI_PATH}"
-    echo "blackfire.agent_socket=tcp://${PHP_BLACKFIRE_AGENT_HOST:-blackfire}:${PHP_BLACKFIRE_AGENT_PORT:-8707}" >> "${PHP_BLACKFIRE_INI_PATH}"
-    echo "blackfire.agent_timeout=${PHP_BLACKFIRE_AGENT_TIMEOUT:-0.25}" >> "${PHP_BLACKFIRE_INI_PATH}"
-
-    cp "${PHP_BLACKFIRE_INI_PATH}" /etc/php/7.2/cli/conf.d/20-blackfire.ini
-fi
-
 # Configure Apache document root
 APACHE_DOC_ROOT="${APACHE_DOC_ROOT:-/app/public}"
 
