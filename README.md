@@ -30,7 +30,7 @@ docker run -p 80:80 \
 - PHP_XDEBUG_REMOTE_HOST (default: host.docker.internal)
 
 #### Datadog
-- DD_ENABLED (default: 0)
+- DD_TRACE_ENABLED (default: 0)
 - DD_SERVICE_NAME (default: ridiselect)
 - DD_TRACE_ANALYTICS_ENABLED (default: false)
 - DD_AGENT_HOST (default: localhost)

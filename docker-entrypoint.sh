@@ -23,13 +23,8 @@ then
 fi
 
 # Configure Datadog
-if [[ ! -z "${DD_ENABLED}" && "${DD_ENABLED}" != "0" ]]
-then
-    export DD_TRACE_ENABLED=1
-    export DD_SERVICE_NAME=${DD_SERVICE_NAME:-ridiselect}
-else 
-    export DD_TRACE_ENABLED=0
-fi
+export DD_TRACE_ENABLED=${DD_TRACE_ENABLED:-0}
+export DD_SERVICE_NAME=${DD_SERVICE_NAME:-ridiselect}
 
 # Configure Apache document root
 APACHE_DOC_ROOT="${APACHE_DOC_ROOT:-/app/public}"
