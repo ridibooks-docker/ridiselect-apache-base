@@ -13,7 +13,6 @@ function run_test()
             --name apache-test \
             -v $(pwd)/test:/test \
             -e PHP_XDEBUG_ENABLE=1 \
-            -e PHP_BLACKFIRE_ENABLE=1 \
             -p 8000:80 \
             ridiselect-apache-base:latest >/dev/null 2>&1
     else
@@ -21,7 +20,6 @@ function run_test()
         docker run -d --rm \
             --name apache-test \
             -v $(pwd)/test:/test \
-            -e PHP_BLACKFIRE_ENABLE=1 \
             -p 8000:80 \
             ridiselect-apache-base:latest >/dev/null 2>&1
     fi

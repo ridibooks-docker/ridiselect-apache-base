@@ -20,15 +20,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 && apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y \
 && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
-RUN curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s \
-    "https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;")" \
-&& mkdir -p /tmp/blackfire \
-&& tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp/blackfire \
-&& mv /tmp/blackfire/blackfire-*.so "$(php -r "echo ini_get('extension_dir');")/blackfire.so" \
-&& rm -rf /tmp/blackfire /tmp/blackfire-probe.tar.gz \
-&& mkdir -p /var/log/blackfire \
-&& ln -sfT /dev/stdout /var/log/blackfire/blackfire.log \
-&& chown -R --no-dereference www-data:www-data /var/log/blackfire
+ENV DD_TRACER_VERSION 0.39.2
+RUN curl -sL -o /tmp/dd-php-tracer \
+    "https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-php-tracer_${DD_TRACER_VERSION}_amd64.deb" \
+&& dpkg -i /tmp/dd-php-tracer \
+&& rm -rf /tmp/dd-php-tracer
 
 RUN a2disconf other-vhosts-access-log \
 && ln -sfT /dev/stderr /var/log/apache2/error.log \
